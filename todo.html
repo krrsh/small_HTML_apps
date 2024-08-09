@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+</head>
+<body>
+    <input type="text" id="text">
+<button onclick="addingElement()">Add</button>
+<ul id="ulist">
+</ul>
+<script>
+    //selecing the input
+    var input = document.getElementById("text")
+    //selecting ul tag
+    var list = document.getElementById("ulist")
+
+
+    function addingElement(){
+        var element = document.createElement("li")
+        element.innerHTML = input.value+"<button onclick='deleting(event)'>Done</button>"
+        list.append(element)
+        input.value = '';
+        
+    }
+    
+    function deleting(event){
+        // event.target.parentElement.remove();
+        event.target.parentElement.classList.add('strikethrough');
+    }
+
+</script>
+
+<style>
+     .strikethrough {
+            text-decoration: line-through;
+        }
+</style>
+</body>
+</html>

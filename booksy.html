@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booksy</title>
+</head>
+<body>
+    <h1 class="title">Booksy</h1>
+<div class="contentt">
+<div class="content">
+    <h2 style="color: cornflowerblue; padding: 2%;" class="booktittle">Meditations</h2>
+    <h3 style="padding: 2%;">Marcus Aurelius</h3>
+    <div  class="para"><p  style="padding: 2%;">This book is about the stoic philosophy of marcus aurelius that one could follow to live a kind of peaceful and meaningful life in which complexities by a human mind is sorted out in philosophycal manner</p></div>
+    <button  onclick="delt(event)" style="padding: 2%;" class="btn">Delete</button>
+</div>
+</div>
+
+<button class="plusBtn">+</button>
+<div class="overlay"></div>
+<div style="display: flex; align-items:center; justify-content: center;">
+<div class="popup-container">
+    <h2 style="padding: 5px;">Add Book</h2>
+    <input type="text" placeholder="Book Title" class="booktitle">
+    <input type="text" placeholder="Author" class="bookauthor">
+    <input  type="text" placeholder="Synopsis" class="synopsis">
+    <div>
+        <button class="addbtn">ADD</button>
+        <button class="cancelbtn">CANCEL</button>
+    </div>
+</div>
+</div>
+
+<style>
+    *{
+        padding: 0px;
+        margin: 0px;
+    }
+     .booktittle{
+        display: block;
+    }
+    .title{
+        background-color: cornflowerblue;
+        color: black;
+        padding: 1%;
+    }
+    .content{
+        background-color: black;
+        margin: 2%;
+        padding: 2%;
+        border-radius: 5%;
+        width: 300px;
+        height: auto;
+        color: white;
+        vertical-align: top;
+        display: inline-block;
+
+    }
+    .para{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 285px;
+        height: 95px;
+    }
+    .btn{
+        border: none;
+        background-color: cornflowerblue;
+        border-radius: 5px;
+        padding: 7px;
+        margin-top: 10px;
+        margin-left: 10px;
+        display: inline-block;
+        width: 50px;
+    }
+
+    .plusBtn{
+        width: 70px;
+        height: 70px;
+        background-color: cornflowerblue;
+        color: black;
+        border-radius: 100%;
+        font-size: 40px;
+        border: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+    .overlay{
+        background-color: black;
+        opacity: 0.8;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        position: absolute;
+        top: 0%;
+        display: none;
+    }
+    .popup-container{
+        flex-direction: column;
+        align-items: left;
+        justify-content: center;
+        height: auto;
+        width: 370px;
+        border-radius: 5%;
+        background-color: cornflowerblue;
+        color: black;
+        position: absolute;
+        z-index: 2;
+        display: none;
+        padding: 20px;
+    }
+    .booktitle, .bookauthor, .synopsis{
+        width: 75%;
+        padding: 5px;
+        margin: 5px;
+        background-color: black;
+        border: none;
+        color: white;
+    }
+
+
+    .addbtn, .cancelbtn{
+        background-color: black;
+        color: white;
+        padding: 3%;
+        border: none;
+        margin: 5px;
+    }
+    .synopsis{
+        margin: 5px;
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-bottom: 50%;
+        min-height: 0%;
+        /* width: 300px; */
+        background-color: black;
+        color: white;
+    }
+</style>
+
+<script>
+    //selecting plus button
+    //selecting overlay
+    //selecting popupbox
+    var plusBtn = document.querySelector(".plusBtn")
+    var overlay = document.querySelector(".overlay")
+    var popupbox = document.querySelector(".popup-container")
+
+    //function show(){
+        //overlay.style.display = "block";
+      //  popupbox.style.display = "block";
+    //}
+    plusBtn.addEventListener("click", function(){
+        overlay.style.display = "block"
+        popupbox.style.display = "flex";
+    })
+
+    //selecting cancel and add button
+    var addbutton = document.querySelector(".addbtn")
+    var cancelbutton = document.querySelector(".cancelbtn")
+
+        //selecting content box
+    //selecting all three inputs in popup box
+    var contennt = document.querySelector(".contentt");
+    var tittle = document.querySelector(".booktitle")
+    var author = document.querySelector(".bookauthor")
+    var synopsis = document.querySelector(".synopsis")
+
+
+    cancelbutton.addEventListener("click", function(){
+        overlay.style.display = "none"
+        popupbox.style.display = "none";
+        tittle.value = ''
+        author.value = ''
+        synopsis.value = ''
+    })
+    addbutton.addEventListener("click", function(){
+        if(tittle.value && author.value && synopsis.value != ''){
+            var div = document.createElement("div");
+        div.setAttribute("class", "content");
+        div.innerHTML = `<h2 style="color: cornflowerblue; padding: 2%;">${tittle.value}</h2>
+                         <h3 style="padding: 2%;">${author.value}</h3>
+                         <div class="para"><p style="padding: 2%;" class="para">${synopsis.value}</p></div>
+                         <button onclick="delt(event)" style="padding: 2%;" class="btn">Delete</button>`
+        contennt.append(div)
+        overlay.style.display = "none"
+        popupbox.style.display = "none";
+        tittle.value = ''
+        author.value = ''
+        synopsis.value = ''
+        }
+        else{
+            alert('Fill all the details to add!')
+        }
+    })
+    
+    function delt(event){
+        event.target.parentElement.remove();
+    }
+
+</script>
+
+</body>
+</html>

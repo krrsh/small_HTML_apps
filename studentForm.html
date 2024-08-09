@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+</head>
+<body>
+    <style>
+        h1{
+            padding-top: 50px;
+        }
+        .table1{
+            border: 1px solid gray;
+            padding: 5px;
+        }
+        .name, .nameInput, .age, .inputAge, .gen, .inputGen, .cour, .inputCour, .mail, .inputMail, .saveBtn{
+            border: 1px solid gray;
+        }
+        .saveBtn{
+           width: 100%;
+           color: darkcyan;
+        }
+        .table2{
+            margin-top: 20px;
+            border: 1px solid gray;
+        }
+        .table2 td{
+            border: 1px solid gray;
+            width: 150px;
+            text-align: center;
+        }
+        .delt{
+            background-color: red;
+            color: aliceblue;
+        }
+    </style>
+    
+    <center>
+    <h1>STUDENT FORM</h1>
+    
+    <table class="table1">
+        <tr>
+            <td class="name">Name</td> <td class="nameInput"> <input class="NInput" type="text"> </td>
+        </tr>
+        <tr>
+            <td class="age">Age</td> <td class="inputAge"> <input class="AInput" type="number"> </td>
+        </tr>
+        <tr>
+            <td class="gen">Gender</td> <td class="inputGen"> <input class="Ginput" type="radio" name="gender" value="Male">Male  <input type="radio" name="gender" value="Female">Female</td>
+        </tr>
+        <tr>
+            <td class="cour">Course</td>
+            <td class="inputCour" style="text-align: center;"> 
+                <select style="width: 100%; text-align: center;" class="Cinput"> 
+                    <option></option>
+                    <option>Javascript</option>
+                    <option>Python</option>
+                    <option>Java</option>
+                </select> 
+            </td>
+        </tr>
+        <tr>
+            <td class="mail">Email</td> <td class="inputMail"> <input class="Einput" type="email"> </td>
+        </tr>
+        <tr>
+            <td class="saveBtn" colspan="2"><button onclick="addData()" style="width: 100%; background-color: aquamarine;">Save</button></td>
+        </tr>
+    </table>
+    
+    <table class="table2">
+        <tr>
+            <td>NAME</td> <td>AGE</td> <td>GENDER</td> <td>COURSE</td> <td>EMAIL</td> <td>ACTION</td>
+        </tr>
+    </table>
+    </center>
+    
+    <script>
+        //selecting table2
+        var tab2 = document.querySelector(".table2")
+        //selecting inputs
+        var nameInput = document.querySelector(".NInput")
+        var ageInput = document.querySelector(".AInput")
+        var courseInput = document.querySelector(".Cinput")
+        var mailInput = document.querySelector(".Einput")
+    
+    
+        function addData(){
+                var nameV = nameInput.value;
+                var ageV = ageInput.value;
+                var courseV = courseInput.value;
+                var mailV = mailInput.value;
+                var Ginput = getGender();
+    
+            if(nameV == '' || ageV == '' || courseV == ''|| mailV == '' || Ginput == ''){
+                alert("Enter all the details!")
+            }
+    
+            else{
+            var newrow = document.createElement("tr")
+            newrow.innerHTML = `<td>${nameInput.value}</td> <td>${ageInput.value}</td> <td>${Ginput}</td> <td>${courseInput.value}</td> <td>${mailInput.value}</td> <td><button onclick='deletingData(event)' class='delt'>Delete</button></td>`
+            tab2.append(newrow)
+            nameInput.value = '';
+            ageInput.value = '';
+            courseInput.value = '';
+            mailInput.value = '';
+    
+            var radios = document.getElementsByName('gender');
+            for (var i = 0; i < radios.length; i++) {
+                radios[i].checked = false;
+            }
+        }
+        }
+    
+        function deletingData(event){
+            event.target.parentElement.parentElement.remove();
+        }
+    
+        function getGender() {
+            // Get all radio buttons with the name "gender"
+            var radios = document.getElementsByName('gender');
+            
+            // Loop through each radio button
+            for (var i = 0; i < radios.length; i++) {
+                // Check if the radio button is checked
+                if (radios[i].checked) {
+                    // If checked, display the value
+                    return radios[i].value
+                }
+            }
+            return ''
+        }
+    
+    </script>    
+</body>
+</html>
